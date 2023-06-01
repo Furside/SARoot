@@ -1386,7 +1386,7 @@
         </ReportItems>
         <KeepTogether>true</KeepTogether>
         <Height>1.2cm</Height>
-        <Width>40cm</Width>
+        <Width>28.68678cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1397,7 +1397,7 @@
     <Height>0.47244in</Height>
     <Style />
   </Body>
-  <Width>15.74803in</Width>
+  <Width>11.29401in</Width>
   <Page>
     <PageHeight>8.5in</PageHeight>
     <PageWidth>13in</PageWidth>

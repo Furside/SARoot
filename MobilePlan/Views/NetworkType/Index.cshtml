@@ -64,17 +64,19 @@
                     <thead class="table-dark">
                         <tr>
                             @*<th>@Html.DisplayNameFor(model => model.Network)</th>*@
+                            <th>Account No</th>
+                            <th>Account Name</th>
+                            <th>Mobile Number</th>
                             <th>End-User</th>
-                            <th>Phone Number</th>
                             <th>Network</th>
                             <th>BINCARD</th>
                             <th>Remarks</th>
                             <th>Contract Start Date</th>
-                            <th>Contract End</th>
+                            <th>Contract End Date</th>
                             <th>Status</th>
-                            <th>Overdue Balance</th>
-                            <th>Early Renewal Fee</th>
-                            <th>Exisitng Plan</th>
+                            @*<th>Overdue Balance</th>
+                            <th>Early Renewal Fee</th>*@
+                            <th>Existing Plan</th>
                             <th>Inclusion</th>
                             <th>Handset Model</th>
                             <th>Existing Duo No.</th>
@@ -90,17 +92,18 @@
                         {
                             <tr>
                                 @*<td>@Html.DisplayFor(modelItem => item.Network )</td>*@
-                                
-                                <td>@inneritem.EndUserName </td>
+                                <td>@inneritem.AccountName </td>
+                                <td>@inneritem.AccountNo </td>
                                 <td>@inneritem.MobileNo</td>
+                                <td>@inneritem.EndUserName </td>
                                 <td>@inneritem.NetworkTypeName</td>
                                 <td>@inneritem.BINCARD</td>
                                 <td>@inneritem.Remarks</td>
                                 <td>@inneritem.ContractStart</td>
                                 <td>@inneritem.ContractEnd</td>
                                 <td>@inneritem.Status</td>
-                                <td>@inneritem.OverdueBalance</td>
-                                <td>@inneritem.EarlyRenewal</td>
+                                @*<td>@inneritem.OverdueBalance</td>
+                                <td>@inneritem.EarlyRenewal</td>*@
                                 <td>@inneritem.ExistingPlan</td>
                                 <td>@inneritem.Inclusion</td>
                                 <td>@inneritem.HandsetModel</td>

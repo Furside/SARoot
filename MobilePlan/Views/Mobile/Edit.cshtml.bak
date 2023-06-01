@@ -1,4 +1,4 @@
-@model MobilePlan.Models.Contact
+@model MobilePlan.Models.NetworkType
 
 @{
     ViewBag.Title = "Edit";
