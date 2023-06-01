@@ -62,17 +62,17 @@
 </div>
 <div class="col-md-4">
     @Html.LabelFor(model => model.AccountName)
-    @Html.EditorFor(model => model.AccountName, new { htmlAttributes = new { @class = "form-control form-control-sm m-phone" } })
+    @Html.EditorFor(model => model.AccountName, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
     @Html.ValidationMessageFor(model => model.AccountName, "", new { @class = "text-danger" })
 </div>
 <div class="col-md-4">
     @Html.LabelFor(model => model.AccountNo)
-    @Html.EditorFor(model => model.AccountNo, new { htmlAttributes = new { @class = "form-control form-control-sm m-phone" } })
+    @Html.EditorFor(model => model.AccountNo, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
     @Html.ValidationMessageFor(model => model.AccountNo, "", new { @class = "text-danger" })
 </div>
 <div class="col-md-4">
     @Html.LabelFor(model => model.NetworkTypeID)
-    @Html.DropDownListFor(model => model.NetworkTypeID, new MobilePlan.Models.NetworkType().ListNetwork(), new { @class = "form-select form-select-sm network-provider", id="network-provider" })
+    @Html.DropDownListFor(model => model.NetworkTypeID, new MobilePlan.Models.NetworkType().ListNetwork(), new { @class = "form-select form-select-sm network-provider", id = "network-provider" })
     @Html.ValidationMessageFor(model => model.NetworkTypeID, "", new { @class = "text-danger" })
 </div>
 <div class="col-md-4">
@@ -102,13 +102,12 @@
 </div>
 <div class="col-md-4 ui-widget">
     
-    
-    @foreach (var item in new MobilePlan.Models.Contact().EmployeeList())
+    @*@foreach (var item in new MobilePlan.Models.Contact().EmployeeList())
     {
-        @*<script>
+        <script>
             availableTags.push("@item.Text");
-        </script>*@
-    }
+        </script>
+    }*@
 
     @Html.LabelFor(model => model.EndUserName)
     @Html.EditorFor(model => model.EndUserName, new { htmlAttributes = new { @class = "form-control form-control-sm ui-autocomplete-input", id = "tags", autocomplete = "off" } })
@@ -174,8 +173,20 @@
 <script>
     console.log('hey');
     $(document).ready(function () {
-        document.getElementById("network-provider").value = 0;
-            var options = {
+        @{
+            ViewBag.DisableInput = "";
+            if (ViewBag.Title == "Delete")
+            {
+                ViewBag.DisableInput = "DisableInput();"; 
+            }
+            else
+            {
+                ViewBag.DisableInput = "EnableInput();";
+            }
+        }
+        @ViewBag.DisableInput
+                    document.getElementById("network-provider").value = 0;
+                var options = {
                 onKeyPress: function (cep, e, field, options) {
                     console.log("input: " + cep);
                     document.getElementById("network-provider").value = networkList.at(
@@ -191,16 +202,30 @@
                             ).toString()
                         )
                     ) : -1;
-            }
-        };
+                }
+            };
 
+            $('.m-phone').mask('0000-000-0000', options);
 
-        $('.m-phone').mask('0000-000-0000', options);
+            
     });
     function SetNetwork(network) {
         return $('.network-provider').value(network)
     }
 
+    function DisableInput() {
+        $('.form-control').prop('readonly', true);
+    }
 
+    function EnableInput() {
+        $('.form-control').prop('readonly', false);
+    }
+
+    @{
+
+
+    }
+    
 
 </script>
+
