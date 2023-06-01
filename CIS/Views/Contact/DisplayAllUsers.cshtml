@@ -1,0 +1,41 @@
+﻿@model CIS.Models.Contact
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <h6 style="display:inline-block;">List of Persons</h6>
+            @Html.ActionLink("Create New", "Create", "", new { @class = "btn btn-primary text-white", style = "display:inline-block; float:right" })
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="data" class="table table-hover table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Obj_EIDHolder)</th>
+                        <th>@Html.DisplayNameFor(model => model.EID )</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.UsersDB().List())
+                    {
+                        <tr>
+                            <td>@item.Fullname</td>
+                            <td>@item.ID</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#data").DataTable();
+</script>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PMSRedirect</name>
+    </assembly>
+    <members>
+        <member name="T:PMSRedirect.UserSessions">
+            <summary>
+            This is use only for sub system to enable session for user
+            </summary>
+        </member>
+        <member name="P:PMSRedirect.UserSessions.User">
+            <summary>
+            User information
+            </summary>
+        </member>
+        <member name="P:PMSRedirect.UserSessions.Level">
+            <summary>
+            User Level indicated in PMS
+            </summary>
+        </member>
+        <member name="M:PMSRedirect.UserSessions.#ctor">
+            <summary>
+            Gamitin lang pag gagamit ng parameter na Initialize(Company.ISOTech)
+            </summary>
+        </member>
+        <member name="M:PMSRedirect.UserSessions.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Gamitin lang pag custom connectionstring ang gagamitin
+            </summary>
+            <param name="Server"></param>
+            <param name="Database"></param>
+            <param name="User"></param>
+            <param name="Pass"></param>
+        </member>
+        <member name="M:PMSRedirect.UserSessions.#ctor(System.String)">
+            <summary>
+            Gamitin lang pag custom connectionstring ang gagamitin
+            </summary>
+            <param name="Connectionstring"></param>
+        </member>
+        <member name="P:PMSRedirect.UserSessions.HasSession">
+            <summary>
+            Ito ay para ma check kung exising ang session ng user
+            </summary>
+        </member>
+        <member name="M:PMSRedirect.UserSessions.InitializeSession(System.Int32,PMSRedirect.pmsdbcontrol)">
+            <summary>
+            For PMS Use only
+            </summary>
+            <param name="ID"></param>
+            <param name="s"></param>
+        </member>
+        <member name="M:PMSRedirect.UserSessions.DestroySession">
+            <summary>
+            Gamitin lang pag gusto na idistroy ang current session
+            </summary>
+        </member>
+        <member name="M:PMSRedirect.UserSessions.Initialize(PMSRedirect.Company)">
+            <summary>
+            Pumili lamang ng specific na company na gagamit for example Initialize(Company.ISOTech)
+            </summary>
+            <param name="company"></param>
+        </member>
+        <member name="M:PMSRedirect.UserSessions.InitializeAdmin(PMSRedirect.Company,System.Int32,System.Int32)">
+            <summary>
+            Pumili lamang ng specific na company for example InitializeAdmin(Company.ISOTech, 2);
+            Ito ay ginagamit lang para sa developer mode
+            For Testing and Debugging only!
+            </summary>
+            <param name="company"></param>
+            <param name="ID"></param>
+        </member>
+        <member name="M:PMSRedirect.UserSessions.Initialize">
+            <summary>
+            You need to setup the new instance of UserSession to initialize connectionstring to the database
+            for example
+            UserSession user = new UserSession("Server=;Database=;User=;Pwd=");
+            </summary>
+        </member>
+        <member name="M:PMSRedirect.UserSessions.InitializeAdmin(System.Int32,System.Int32)">
+            <summary>
+            You need to setup the new instance of UserSession to initialize connectionstring to the database
+            for example
+            UserSession user = new UserSession("Server=;Database=;User=;Pwd=");
+            this is for developer only, purpose is to debug the system only and can not be use in published
+            </summary>
+        </member>
+        <member name="T:PMSRedirect.Company">
+            <summary>
+            List of available company to select
+            </summary>
+        </member>
+        <member name="F:PMSRedirect.Company.MHCI">
+            <summary>
+            MHCI company
+            </summary>
+        </member>
+        <member name="F:PMSRedirect.Company.ISOTech">
+            <summary>
+            ISO Tech company
+            </summary>
+        </member>
+        <member name="F:PMSRedirect.Company.Sets">
+            <summary>
+            Sets Company
+            </summary>
+        </member>
+        <member name="F:PMSRedirect.Company.MayoFoods">
+            <summary>
+            Mayo Foods Company
+            </summary>
+        </member>
+        <member name="F:PMSRedirect.Company.General">
+            <summary>
+            General PMS
+            </summary>
+        </member>
+    </members>
+</doc>

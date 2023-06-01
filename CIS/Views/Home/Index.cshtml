@@ -1,0 +1,37 @@
+﻿@model CIS.Models.Contact
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="tableDiv">
+</div>
+
+@section scripts{
+    <script>
+        LoadData("");
+        $('#searchItem').on('keyup', function () {
+            var searchItem = $(this).val();
+            LoadData(searchItem);
+        });
+
+        $("#data").DataTable();
+
+        function LoadData(search)
+        {
+            $.ajax({
+                url: '@Url.Action("Search", "Contact")',
+                type: 'GET',
+                data: { item: search },
+                success: function (data) {
+                    $('#tableDiv').html(data);
+                },
+                error: function () {
+                    alert('An error occurred while fetching the data.');
+                }
+            });
+        }
+
+    </script>
+}

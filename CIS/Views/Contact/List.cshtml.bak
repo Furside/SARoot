@@ -1,0 +1,100 @@
+﻿@model IEnumerable<CIS.Models.Contact>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <h6 style="display:inline-block;">Contacts</h6>
+            @Html.ActionLink("Create New", "Create", "", new { @class = "btn btn-primary text-white", style = "display:inline-block; float:right" })
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="data" class="table table-hover table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.ID)</th>
+                        <th>@Html.DisplayNameFor(model => model.Obj_EIDHolder)</th>
+                        <th>@Html.DisplayNameFor(model => model.NetworkNo)</th>
+                        <th>Position</th>
+                        <th>Department</th>
+                        <th>Network Provider</th>
+                        <th>@Html.DisplayNameFor(model => model.BinCard)</th>
+                        <th>@Html.DisplayNameFor(model => model.Remarks)</th>
+                        <th>@Html.DisplayNameFor(model => model.EncBy)</th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ID </td>
+                            <td>@item.Obj_EIDHolder.Info.Fullname</td>
+                            <td>@item.NetworkNo</td>
+                            <td>@item.Obj_EIDHolder.Info.position </td>
+                            <td>@item.Obj_EIDHolder.Info.department </td>
+                            <td>@item.GetNetworkName(item.NetworkTypeID) </td>
+                            <td>@item.NetworkName </td>
+                            <td>@item.BinCard </td>
+                            <td>@item.Remarks</td>
+                            <td>@item.Obj_LastModifiedBy.Info.Fullname</td>
+                            <td>
+                                <div class="text-center">
+                                    <div class="btn-group">
+                                        <a href="@Url.Action("Update","Contact", new { id=item.ID})" class="btn btn-secondary btn-sm" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="@Url.Action("Profile","Contact", new { id=item.EID})" class="btn btn-secondary btn-sm" title="Details"><i class="fa-solid fa-circle-info"></i></a>
+                                        <a href="@Url.Action("DeleteView","Contact", new { id=item.ID})" class="btn btn-secondary btn-sm" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    $("#data").DataTable();
+</script>
+
+@section scripts{
+    <script>
+        LoadData("");
+        $('#searchItem').on('keyup', function () {
+        var searchItem = $(this).val();
+        LoadData(searchItem);
+
+        });
+
+        $("#data").DataTable();
+
+        function LoadData(search)
+        {
+            $.ajax({
+                url: '@Url.Action("Search", "Contact")',
+                type: 'GET',
+                data: { item: search },
+                success: function (data) {
+                    $('#tableDiv').html(data);
+                },
+                error: function () {
+                    alert('An error occurred while fetching the data.');
+                }
+            });
+
+        }
+
+    </script>
+}

@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Data;
+using MobilePlan.Classes;
+using PMSRedirect;
+using System.Web.Mvc;
+
+namespace MobilePlan.Models
+{
+    public class PrefixNo
+    {
+        public static SelectList prefixNos {
+            get
+            {
+                return new NetworkType().ListPrefix();
+            }
+        }
+        public static SelectList networks {
+            get
+            {
+                return new NetworkType().ListNetwork();
+            }
+        }
+    }
+}

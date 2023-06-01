@@ -1,0 +1,106 @@
+﻿@model CIS.Models.NetworkType
+
+@{
+    ViewBag.Title = "Network Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    CIS.Models.Contact contact = new CIS.Models.Contact();
+}
+
+<div class="row mb-3">
+    <div class="col-md-10 m-auto">
+        <div class="row">
+            <div class="col-md-4 d-inline-block">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title">@Model.Name Network Profile</h6>
+                    </div>
+                    <div class="card-body">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="row mb-2 g-2">
+                                <div class="col-md-12">
+                                    <div class="form-label">Name</div>
+                                    <div class="row form-control" style="--bs-gutter-x: 0">@Model.Name </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Encoded By</label>
+                                    <div class="row form-control" style="--bs-gutter-x: 0">@contact.Find(Model.EncBy).Obj_EIDHolder.Info.Fullname </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Encoded Date</label>
+                                    <div class="row form-control" style="--bs-gutter-x: 0">@String.Format("{0:MMM dd, yyyy hh:mm tt}", Model.EncDate) </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Last Modified By</label>
+                                    <div class="row form-control" style="--bs-gutter-x: 0">@contact.Find(Model.LastModifiedBy).Obj_EIDHolder.Info.Fullname </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Last Modified Date</label>
+                                    <div class="row form-control" style="--bs-gutter-x: 0">@String.Format("{0:MMM dd, yyyy hh:mm tt}", Model.LastModifiedDate) </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    @Html.ActionLink("Back to List", "List", "NetworkType", "", new { @class = "btn btn-secondary" })
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        <div class="col-md-8 d-inline-block">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h6 style="display:inline-block;">Contacts</h6>
+                        @Html.ActionLink("Create New", "Create", "Contact", "", new { @class = "btn btn-primary text-white", style = "display:inline-block; float:right" })
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="data" class="table table-hover table-striped">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Contact ID</th>
+                                    <th>Contact Name</th>
+                                    <th>Mobile No.</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in contact.Retrieve(Model.ID))
+                                {
+                                    <tr>
+                                        <td>@item.ID </td>
+                                        <td>@item.UsersDB().List().Find(f => f.ID == item.EID).Info.Fullname</td>
+                                        <td>@item.NetworkNo</td>
+                                        <td>
+                                            <div class="text-center">
+                                                <div class="btn-group">
+                                                    <a href="@Url.Action("Update","Contact", new { id=item.ID } )" class="btn btn-secondary btn-sm" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                    <a href="@Url.Action("DeleteView","Contact", new { id=item.ID } )" class="btn btn-secondary btn-sm" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $("#data").DataTable();
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

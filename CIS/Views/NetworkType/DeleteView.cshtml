@@ -1,0 +1,55 @@
+﻿@model CIS.Models.NetworkType
+
+@{
+    ViewBag.Title = "DeleteView";
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-8 m-auto">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title">Delete</h6>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="row mb-2 g-2">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Name , htmlAttributes: new { @class = "form-label" })
+                            <div class="form-control">@Model.Name </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Encoder Fullname</label>
+                            <div class = "form-control" >@Model.GetEncoderFullName(Model.EncBy)</div>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.EncDate , htmlAttributes: new { @class = "form-label" })
+                            <div class="form-control">@String.Format("{0:MMM dd, yyyy hh:mm tt}", Model.EncDate) </div >
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Last Modifier Fullname</label>
+                            <div class="form-control">@Model.GetEncoderFullName(Model.LastModifiedBy )</div>
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.LastModifiedDate , htmlAttributes: new { @class = "form-label" })
+                            <div class="form-control">@String.Format("{0:MMM dd, yyyy hh:mm tt}", Model.LastModifiedDate)</div>
+                        </div>
+
+                        <div class="col-md-16">
+                            <input type="submit" name="name" value="Delete" class="btn btn-danger" />
+                            @Html.ActionLink("Back to List", "List", "NetworkType", "", new { @class = "btn btn-secondary" })
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

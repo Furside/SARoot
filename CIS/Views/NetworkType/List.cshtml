@@ -1,0 +1,88 @@
+﻿@model IEnumerable<CIS.Models.NetworkType>
+@{
+    ViewBag.Title = "Networks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <h6 style="display:inline-block;">Networks</h6>
+            @Html.ActionLink("Create New", "Create", "", new { @class = "btn btn-primary text-white", style = "display:inline-block; float:right" })
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="data" class="table table-hover table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Name)</th>
+                        <th>Encoder Fullname</th>
+                        <th>@Html.DisplayNameFor(model => model.EncDate)</th>
+                        <th>Last Modified By</th>
+                        <th>@Html.DisplayNameFor(model => model.LastModifiedDate)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name </td>
+                            <td>@item.GetEncoderFullName(item.EncBy)</td>
+                            <td>@String.Format("{0:MMM dd, yyyy hh:mm tt}",item.EncDate) </td>
+                            @*<td>@item.EncDate </td>*@
+                            <td>@item.GetEncoderFullName(item.LastModifiedBy)</td>
+                            <td>@String.Format("{0:MMM dd, yyyy hh:mm tt}",item.LastModifiedDate)</td>
+                            @*<td>@item.LastModifiedDate</td>*@
+                            <td>
+                                <div class="text-center">
+                                    <div class="btn-group">
+                                        <a href="@Url.Action("Update","NetworkType", new { id=item.ID})" class="btn btn-secondary btn-sm" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="@Url.Action("Find","NetworkType", new { id=item.ID})" class="btn btn-secondary btn-sm" title="Details"><i class="fa-solid fa-circle-info"></i></a>
+                                        <a href="@Url.Action("DeleteView","NetworkType", new { id=item.ID})" class="btn btn-secondary btn-sm" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#data").DataTable();
+</script>
+
+<div id="tableDiv">
+</div>
+
+@section scripts{
+    <script>
+        LoadData("");
+        $('#searchItem').on('keyup', function () {
+        var searchItem = $(this).val();
+        LoadData(searchItem);
+
+        });
+
+        $("#data").DataTable();
+
+        function LoadData(search)
+        {
+            $.ajax({
+                url: '@Url.Action("Search", "Network")',
+                type: 'GET',
+                data: { item: search },
+                success: function (data) {
+                    $('#tableDiv').html(data);
+                },
+            });
+
+        }
+
+    </script>
+}

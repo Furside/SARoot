@@ -1,0 +1,28 @@
+@model MobilePlan.Models.Contact
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = null;
+}
+
+@using (Ajax.BeginForm("Delete", new AjaxOptions { UpdateTargetId = "fielddata" }))
+{
+    <div class="modal-header bg-danger text-white">
+        <h6>@ViewBag.Title</h6>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        @Html.HiddenFor(f => f.ID)
+        <div id="fielddata" class="row mb-2 g-2">
+            @Html.Partial("Field")
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="submit" value="Delete" class="btn btn-danger text-white" />
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+    </div>
+}
+
+
+
+@Scripts.Render("~/bundles/jqueryval")

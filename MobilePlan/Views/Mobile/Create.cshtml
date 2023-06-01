@@ -1,0 +1,42 @@
+@model MobilePlan.Models.Contact
+
+@{
+    ViewBag.NetworkPrefixes = Model.NetworkPrefixList();
+    ViewBag.Title = "New";
+    Layout = null;
+}
+
+@using (Ajax.BeginForm("Create", new AjaxOptions { UpdateTargetId = "fielddata" }))
+{
+    <div class="modal-header bg-primary text-white">
+        <h6>@ViewBag.Title</h6>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <div id="fielddata" class="row mb-2 g-2">
+            @Html.Partial("Field")
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="submit" value="Create" class="btn btn-success text-white" />
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+    </div>
+}
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/jquerymask")
+
+<script>
+    var prefixList = [];
+    var networkList = [];
+</script>
+
+@foreach (var net in ViewBag.NetworkPrefixes)
+{
+    <script>
+        prefixList.push("@net.Value");
+        networkList.push("@net.Text");
+    </script>
+}
+
+
+

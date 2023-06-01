@@ -1,0 +1,24 @@
+@model MobilePlan.Models.NetworkType
+
+@{
+    ViewBag.Title = "New";
+    Layout = null;
+}
+
+@using (Ajax.BeginForm("Create", new AjaxOptions { UpdateTargetId = "fielddata" }))
+{
+    <div class="modal-header bg-primary text-white">
+        <h6>@ViewBag.Title</h6>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <div id="fielddata" class="row mb-2 g-2">
+            @Html.Partial("Field")
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="submit" value="Create" class="btn btn-success text-white" />
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+    </div>
+}
+@Scripts.Render("~/bundles/jqueryval")

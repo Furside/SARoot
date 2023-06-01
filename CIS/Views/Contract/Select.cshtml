@@ -1,0 +1,93 @@
+﻿@model IEnumerable<CIS.Models.Contract>
+
+@{
+    ViewBag.Title = "Select";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="tableDiv">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <h6 style="display:inline-block;">Contract</h6>
+                @Html.ActionLink("Create New", "Insert", "", new { @class = "btn btn-primary text-white", style = "display:inline-block; float:right" })
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="data" class="table table-hover table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.ID)</th>
+                            <th>@Html.DisplayNameFor(model => model.HolderID)</th>
+                            <th>@Html.DisplayNameFor(model => model.HolderType)</th>
+                            <th>@Html.DisplayNameFor(model => model.Status)</th>
+                            <th>@Html.DisplayNameFor(model => model.StartDate)</th>
+                            <th>@Html.DisplayNameFor(model => model.EndDate)</th>
+                            <th>@Html.DisplayNameFor(model => model.EncBy)</th>
+                            <th>@Html.DisplayNameFor(model => model.EncDate)</th>
+                            <th>@Html.DisplayNameFor(model => model.ModifiedBy)</th>
+                            <th>@Html.DisplayNameFor(model => model.ModifiedDate)</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ID </td>
+                                <td>@item.HolderID </td>
+                                <td>@item.HolderType </td>
+                                <td>@item.Status </td>
+                                <td>@item.StartDate </td>
+                                <td>@item.EndDate </td>
+                                <td>@item.EncBy </td>
+                                <td>@item.EncDate</td>
+                                <td>@item.ModifiedBy</td>
+                                <td>@item.ModifiedDate</td>
+                                <td>
+                                    <div class="text-center">
+                                        <div class="btn-group">
+                                            <a href="@Url.Action("Update","Contract", new { id=item.ID})" class="btn btn-secondary btn-sm" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <a href="@Url.Action("Details","Contract", new { id=item.ID })" class="btn btn-secondary btn-sm" title="Details"><i class="fa-solid fa-circle-info"></i></a>
+                                            <a href="@Url.Action("Delete","Contract", new { id=item.ID})" class="btn btn-secondary btn-sm" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    $("#data").DataTable();
+</script>
+
+
+@section scripts{
+    <script>
+        LoadData("");
+        $('#searchItem').on('keyup', function () {
+            var searchItem = $(this).val();
+            LoadData(searchItem);
+        });
+
+        $("#data").DataTable();
+
+        function LoadData(search)
+        {
+            $.ajax({
+                url: '@Url.Action("Select", "Contract")',
+                type: 'GET'
+            });
+        }
+    </script>
+}

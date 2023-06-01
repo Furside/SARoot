@@ -1,0 +1,56 @@
+﻿@model CIS.Models.Contact
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+
+<div class="modal-dialog" id="itemDetails">
+    <div class="modal-content">
+
+        <div class="row">
+            <div class="col-md-12 m-auto">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title">Delete</h6>
+                    </div>
+                    <div class="card-body">
+                        @using (Html.BeginForm("DeleteView", "Contact", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="row mb-2 g-2">
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.NetworkNo, htmlAttributes: new { @class = "form-label" })
+                                    @Html.EditorFor(model => model.NetworkNo, new { htmlAttributes = new { @class = "form-control mb-2", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.NetworkNo, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.NetworkTypeID, htmlAttributes: new { @class = "form-label" })
+                                    <input class="form-control mb-2 text-box single-line" readonly="readonly" value="@Model.NetworkProvider" />
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.BinCard, htmlAttributes: new { @class = "form-label" })
+                                    @Html.EditorFor(model => model.BinCard, new { htmlAttributes = new { @class = "form-control mb-2", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.BinCard, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-12">
+                                    @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "form-label" })
+                                    @Html.TextAreaFor(model => model.Remarks, 10, 5, new { @class = "form-control plain-text", @readonly = "readonly" })
+                                    @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="submit" name="name" value="Delete" class="btn btn-danger" />
+                                    @Html.ActionLink("Back to List", "Index", "Home", "", new { @class = "btn btn-secondary" })
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

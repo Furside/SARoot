@@ -1,0 +1,89 @@
+@model MobilePlan.Models.NetworkType
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Execute = "location.reload()";
+}
+
+
+
+    <div class="card">
+        <div class="card-header">
+            <h6>@Model.Network </h6>
+        </div>
+        <div class="card-body">
+            <div class="row row-cols-lg-auto g-1 align-items-center">
+                <div class="col">
+                    <p>
+                        <a class="btn btn-sm btn-success" aria-current="page" href="@Url.Action("Report")" data-bs-toggle="modal" data-bs-target="#ReportModal"><i class="fa fa-book" aria-hidden="true"></i>&nbsp;Report</a>
+                    </p>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table id="data" class="table table-hover table-striped" style="font-size:0.9rem;">
+                    <thead class="table-dark">
+                        <tr>
+                            @*<th>@Html.DisplayNameFor(model => model.Network)</th>*@
+                            <th>End-User</th>
+                            <th>Phone Number</th>
+                            <th>BINCARD</th>
+                            <th>Remarks</th>
+                            <th>Contract Start Date</th>
+                            <th>Contract End</th>
+                            <th>Status</th>
+                            <th>Overdue Balance</th>
+                            <th>Early Renewal Fee</th>
+                            <th>Exisitng Plan</th>
+                            <th>Inclusion</th>
+                            <th>Handset Model</th>
+                            <th>Existing Duo No.</th>
+                            <th>Credit Limit</th>
+                            <th>Spending Limit</th>
+                            <th>Billing Cycle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var inneritem in MobilePlan.Models.NetworkType.NetworkContactList(Model.Network))
+                        {
+                            <tr>
+                                @*<td>@Html.DisplayFor(modelItem => item.Network )</td>*@
+                                <td>@inneritem.EndUserName </td>
+                                <td>@inneritem.MobileNo</td>
+                                <td>@inneritem.BINCARD</td>
+                                <td>@inneritem.Remarks</td>
+                                <td>@inneritem.ContractStart</td>
+                                <td>@inneritem.ContractEnd</td>
+                                <td>@inneritem.Status</td>
+                                <td>@inneritem.OverdueBalance</td>
+                                <td>@inneritem.EarlyRenewal</td>
+                                <td>@inneritem.ExistingPlan</td>
+                                <td>@inneritem.Inclusion</td>
+                                <td>@inneritem.HandsetModel</td>
+                                <td>@inneritem.ExistingDuoNo</td>
+                                <td>@inneritem.CreditLimit</td>
+                                <td>@inneritem.SpendingLimit</td>
+                                <td>@inneritem.BillingCycle</td>
+                                    @*<a href="#" class="text-dark" title="Edit/Modify" onclick="Actions('Edit', @item.ID)"><i class="fa fa-edit"></i></a> &nbsp;
+                                        <a href="#" class="text-dark" title="Details" onclick="Actions('Detail', @item.ID)"><i class="fa fa-sticky-note "></i></a> &nbsp;
+                                        <a href="#" class="text-dark" title="Delete" onclick="Actions('Delete', @item.ID)"><i class="fa fa-trash"></i></a> &nbsp;*@
+                                    @*<a href="" class="text-dark" title="Edit/Modify" onclick="ActionsContact('Edit', @item.ID)"><i class="fa fa-edit"></i></a> &nbsp;
+                                    <a href="" class="text-dark" title="Details" onclick="ActionsContact('Detail', @item.ID)"><i class="fa fa-sticky-note "></i></a> &nbsp;
+                                    <a href="" class="text-dark" title="Delete" onclick="ActionsContact('Delete', @item.ID)"><i class="fa fa-trash"></i></a> &nbsp;*@
+                                
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+@Html.Partial("Report")
+@section scripts{
+    <script>
+        $('#data').DataTable({
+            ordering: true,
+            searching: true
+        });
+    </script>    
+
+}

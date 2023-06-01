@@ -1,0 +1,79 @@
+﻿@model CIS.Models.Signatory
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="modal-dialog" id="itemDetails">
+    <div class="modal-content">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="card-title">Delete</h6>
+                        </div>
+                        <div class="card-body">
+                            @using (Html.BeginForm("Delete", "Signatory", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="row mb-2 g-2">
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(model => model.ID, htmlAttributes: new { @class = "form-label" })
+                                        @Html.DropDownListFor(model => model.ID, new CIS.Models.Contact().ListEmployee(), "Select Employee", new { @class = "form-select" })
+                                        @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(model => model.EncBy, htmlAttributes: new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.EncBy, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.EncBy, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(model => model.EncDate, htmlAttributes: new { @class = "form-label" })
+                                        @Html.DropDownListFor(model => model.EncDate, new CIS.Models.NetworkType().NetworkTypes(), "Select Network", new { @class = "form-select" })
+                                        @Html.ValidationMessageFor(model => model.EncDate, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <input type="submit" name="name" value="Delete" class="btn btn-danger" />
+                                        <button class="btn btn-secondary btn-sm" data-id="@Model.ID" title="Delete" onclick="showModal(@Model.ID), 'Delete')"><i class="fa-solid fa-trash"></i></button>
+                                            @Html.ActionLink("Back to List", "Select", "Signatory", "", new { @class = "btn btn-secondary" })
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            // When the submit button is clicked
+            $('#submitForm').click(function () {
+                // Get the form data
+                var formData = $('#myForm').serialize();
+
+                // Submit the form data via AJAX
+                $.ajax({
+                    url: '/Controller/Action', // Replace with the URL to your controller action
+                    type: 'POST',
+                    data: formData,
+                    success: function (data) {
+                        // Close the modal
+                        $('#myModal').modal('hide');
+
+                        // Optionally, do something with the response data
+                    },
+                    error: function () {
+                        // Handle errors here
+                    }
+                });
+            });
+        });
+    </script>    
+
+}

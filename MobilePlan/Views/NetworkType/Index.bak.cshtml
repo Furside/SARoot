@@ -1,0 +1,186 @@
+@model IEnumerable<MobilePlan.Models.NetworkType>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Execute = "location.reload()";
+}
+
+
+
+
+<div class="card">
+    <div class="card-header">
+        <h6>@ViewBag.Title</h6>
+    </div>
+    <div class="card-body">
+        <div class="row row-cols-lg-auto g-1 align-items-center">
+            <div class="col">
+                <p>
+					<a href="#" class="btn btn-sm btn-success"><i class="fa fa-plus-square"></i>&nbsp;Create</a>
+                </p>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table id="data" class="table table-hover table-striped" style="font-size:0.9rem;">
+                <thead class="table-dark">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Network)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Network)</td>
+                            <td class="text-nowrap">
+                                <a href="#" class="text-dark" title="Edit/Modify" onclick="Actions('Edit', @item.ID)"><i class="fa fa-edit"></i></a> &nbsp;
+                                <a href="#" class="text-dark" title="Details" onclick="Actions('Detail', @item.ID)"><i class="fa fa-sticky-note "></i></a> &nbsp;
+                                <a href="#" class="text-dark" title="Delete" onclick="Actions('Delete', @item.ID)"><i class="fa fa-trash"></i></a> &nbsp;
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@foreach (var item in Model)
+{
+    if (item.ID >0  )
+    {
+        <div class="card">
+            <div class="card-header">
+                <h6>@item.Network.ToUpper() Network Users</h6>
+            </div>
+            <div class="card-body">
+                <div class="row row-cols-lg-auto g-1 align-items-center">
+                    <div class="col">
+                        @*<p>
+                            <a href="#" onclick="Actions('Add')" class="btn btn-sm btn-success"><i class="fa fa-plus-square"></i>&nbsp;Create</a>
+                        </p>*@
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="" class="table network-table table-hover table-striped" style="font-size:0.9rem;">
+                        <thead class="table-dark">
+                            <tr>
+                                @*<th>@Html.DisplayNameFor(model => model.Network)</th>*@
+                                <th>End-User</th>
+                                <th>Phone Number</th>
+                                <th>Network</th>
+                                <th>BINCARD</th>
+                                <th>Remarks</th>
+
+                                <th>Contract Start Date</th>
+                                <th>Contract End</th>
+                                <th>Status</th>
+                                <th>Overdue Balance</th>
+                                <th>Early Renewal Fee</th>
+
+                                <th>Exisitng Plan</th>
+                                <th>Inclusion</th>
+                                <th>Handset Model</th>
+                                <th>Existing Duo No.</th>
+                                <th>Credit Limit</th>
+
+                                <th>Spending Limit</th>
+                                <th>Billing Cycle</th>
+                                @*<th></th>*@
+                                @*<th></th>*@
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var inneritem in MobilePlan.Models.NetworkType.NetworkContactList(item.ID) )
+                            {
+                                <tr>
+                                    @*<td>@Html.DisplayFor(modelItem => item.Network )</td>*@
+                                
+                                    <td>@inneritem.EndUserName </td>
+                                    <td>@inneritem.MobileNo</td>
+                                    <td>@inneritem.NetworkTypeName</td>
+                                    <td>@inneritem.BINCARD</td>
+                                    <td>@inneritem.Remarks</td>
+
+                                    <td>@inneritem.ContractStart</td>
+                                    <td>@inneritem.ContractEnd</td>
+                                    <td>@inneritem.Status</td>
+                                    <td>@inneritem.OverdueBalance</td>
+                                    <td>@inneritem.EarlyRenewal</td>
+
+                                    <td>@inneritem.ExistingPlan</td>
+                                    <td>@inneritem.Inclusion</td>
+                                    <td>@inneritem.HandsetModel</td>
+                                    <td>@inneritem.ExistingDuoNo</td>
+                                    <td>@inneritem.CreditLimit</td>
+
+                                    <td>@inneritem.SpendingLimit</td>
+                                    <td>@inneritem.BillingCycle</td>
+                                    @*<td class="text-nowrap">
+                                        @*<a href="#" class="text-dark" title="Edit/Modify" onclick="Actions('Edit', @item.ID)"><i class="fa fa-edit"></i></a> &nbsp;
+                                        <a href="#" class="text-dark" title="Details" onclick="Actions('Detail', @item.ID)"><i class="fa fa-sticky-note "></i></a> &nbsp;
+                                        <a href="#" class="text-dark" title="Delete" onclick="Actions('Delete', @item.ID)"><i class="fa fa-trash"></i></a> &nbsp;
+                                        @*<a href="" class="text-dark" title="Edit/Modify" onclick="ActionsContact('Edit', @item.ID)"><i class="fa fa-edit"></i></a> &nbsp;
+                                        <a href="" class="text-dark" title="Details" onclick="ActionsContact('Detail', @item.ID)"><i class="fa fa-sticky-note "></i></a> &nbsp;
+                                        <a href="" class="text-dark" title="Delete" onclick="ActionsContact('Delete', @item.ID)"><i class="fa fa-trash"></i></a> &nbsp;
+                                    </td>*@
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+<!-- Modal -->
+<div class="modal fade" id="ModalEntry" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div id="modalcontent" class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script>
+        $('#data').DataTable({
+            ordering: true,
+            searching: true
+        });
+
+        //$('#data-sub').DataTable({
+        //    ordering: false,
+        //    searching: true
+        //});
+
+        $('.network-table').DataTable({
+            ordering: false,
+            searching: true
+        });
+
+		$('#ModalEntry').draggable();
+
+		function Actions(Type, ID) {
+			Ajax('@Url.Action("Action")', {Type : Type ,ID : ID}, 'html', function(data) {
+				$('#modalcontent').html(data);
+				$('#ModalEntry').modal('show');
+			});
+		}
+
+        function ActionsContact(Type, ID) {
+            Ajax('@Url.Action("Action", "Contact")', { Type: Type, ID: ID }, 'html', function (data) {
+                $('#modalcontent').html(data);
+                $('#ModalEntry').modal('show');
+            });
+        }
+
+        function ReloadPage() {
+            location.reload();
+        }
+    </script>
+}

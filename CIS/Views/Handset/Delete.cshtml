@@ -1,0 +1,56 @@
+﻿@model CIS.Models.Handset
+
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Delete</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title">Delete</h6>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="row mb-2 g-2">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => Model.ID, htmlAttributes: new { @class = "form-label" })
+                            @Html.DropDownListFor(model => Model.ID, new CIS.Models.Contact().ListEmployee(), "Select Employee", new { @class = "form-select" })
+                            @Html.ValidationMessageFor(model => Model.ID, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.EncBy, htmlAttributes: new { @class = "form-label" })
+                            @Html.EditorFor(model => model.EncBy, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.EncBy, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.EncDate, htmlAttributes: new { @class = "form-label" })
+                            @Html.DropDownListFor(model => model.EncDate, new CIS.Models.NetworkType().NetworkTypes(), "Select Network", new { @class = "form-select" })
+                            @Html.ValidationMessageFor(model => model.EncDate, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.HolderID, htmlAttributes: new { @class = "form-label" })
+                            @Html.EditorFor(model => model.HolderID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.HolderID, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.HolderType, htmlAttributes: new { @class = "form-label" })
+                            @Html.TextAreaFor(model => model.HolderType, 10, 5, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.HolderType, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-12">
+                            <input type="submit" name="name" value="Delete" class="btn btn-danger" />
+                            @Html.ActionLink("Back to List", "Select", "Handset", "", new { @class = "btn btn-secondary" })
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

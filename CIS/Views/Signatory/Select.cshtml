@@ -1,0 +1,112 @@
+﻿@model CIS.Models.Signatory
+
+@{
+    ViewBag.Title = "Select";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<div class="modal fade" id="UpdateModal" tabindex="-1" aria-labelledby="UpdateModalLabel" aria-hidden="true">
+    <div class="modal-dialog" id="itemDetails">
+        <div class="modal-content">
+            @Html.Partial("~/Views/Signatory/Update.cshtml");
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="DetailsModal" tabindex="-1" aria-labelledby="DetailsModalLabel" aria-hidden="true">
+    @Html.Partial("~/Views/Signatory/Details.cshtml");
+</div>
+<div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
+    @Html.Partial("~/Views/Signatory/Delete.cshtml");
+</div>*@
+
+<div id="tableDiv">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <h6 style="display:inline-block;">Signatory</h6>
+                @Html.ActionLink("Create New", "Insert", "", new { @class = "btn btn-primary text-white", style = "display:inline-block; float:right" })
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="data" class="table table-hover table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.ID)</th>
+                            <th>@Html.DisplayNameFor(model => model.EID)</th>
+                            <th>@Html.DisplayNameFor(model => model.EncBy)</th>
+                            <th>@Html.DisplayNameFor(model => model.EncDate)</th>
+                            <th>@Html.DisplayNameFor(model => model.ModifiedBy)</th>
+                            <th>@Html.DisplayNameFor(model => model.ModifiedDate)</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Select())
+                        {
+                            <tr>
+                                <td>@item.ID </td>
+                                <td>@item.EID</td>
+                                <td>@item.EncBy </td>
+                                <td>@item.EncDate</td>
+                                <td>@item.ModifiedBy</td>
+                                <td>@item.ModifiedDate</td>
+                                <td>
+                                    <div class="text-center">
+                                        <div class="btn-group">
+                                            <button class="btn btn-secondary btn-sm" data-id="@item.ID" title="Update" onclick="showModal(@item.ID, 'Update')"><i class="fa-solid fa-pen-to-square"></i></button>
+                                            @*<a href="@Url.Action("Update","Signatory", new { id=item.ID})" class="btn btn-secondary btn-sm" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>*@
+                                            <button class="btn btn-secondary btn-sm" data-id="@item.ID" title="Details" onclick="showModal(@item.ID, 'Details')"><i class="fa-solid fa-circle-info"></i></button>
+                                            @*<a href="@Url.Action("Update","Signatory", new { id=item.ID})" class="btn btn-secondary btn-sm" title="Details"><i class="fa-solid fa-pen-to-square"></i></a>*@
+                                            <button class="btn btn-secondary btn-sm" data-id="@item.ID" title="Delete" onclick="showModal(@item.ID), 'Delete')"><i class="fa-solid fa-trash"></i></button>
+                                            @*<a href="@Url.Action("Delete","Signatory", new { id=item.ID})" class="btn btn-secondary btn-sm" title="Delete"><i class="fa-solid fa-trash"></i></a>*@
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    $("#data").DataTable();
+</script>
+
+<div class="modal" id="itemDetails">
+    <div class="modal-dialog">
+        <div id="modalContent" class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+        @section scripts{
+            <script>
+
+                $('#searchItem').on('keyup', function () {
+                    var searchItem = $(this).val();
+                });
+
+                function showModal(id, controllerAction) {
+                    $.ajax({
+                        url: '@Url.Action("ModalRedirect", "Signatory")' + '?id=' + id + '&controllerAction=' + controllerAction,
+                        dataType: 'html',
+                        success: function (data) {
+                            $('#modalContent').html(data);
+                            $('#itemDetails').modal('show');
+                        },
+                        complete: function () {
+                            $('#modal').find('.spinner-border').hide();
+                        }
+                    });
+                }
+
+            </script>
+        }

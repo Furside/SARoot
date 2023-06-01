@@ -1,0 +1,29 @@
+@model MobilePlan.Models.Contact
+
+@{
+    ViewBag.Title = "Details";
+    Layout = null;
+}
+
+@using (Ajax.BeginForm("Detail", new AjaxOptions { UpdateTargetId = "fielddata" }))
+{
+    <div class="modal-header">
+        <h6>@ViewBag.Title</h6>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        @Html.HiddenFor(f => f.ID)
+        <div id="fielddata" class="row mb-2 g-2">
+            @Html.Partial("Field")
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="submit" value="Prev" class="btn text-white" />
+        <input type="submit" value="Next" class="btn text-white" />
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+    </div>
+}
+
+
+
+@Scripts.Render("~/bundles/jqueryval")

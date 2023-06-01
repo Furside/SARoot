@@ -1,0 +1,134 @@
+@model MobilePlan.Models.Contact
+
+@{
+    ViewBag.Title = "New";
+    Layout = null;
+}
+
+@using (Ajax.BeginForm("Create", new AjaxOptions { UpdateTargetId = "fielddata" }))
+{
+    <div class="modal-header bg-primary text-white">
+        <h6>@ViewBag.Title</h6>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <div id="fielddata" class="row mb-2 g-2">
+            @Html.Partial("Field")
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="submit" value="Create" class="btn btn-success text-white" />
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+    </div>
+}
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/jquerymask")
+
+<script>
+    $(document).ready(function () {
+        //var networkList = @MobilePlan.Models.Contact.NetworkList;
+        
+        //networkList.items
+
+        document.getElementById("network-provider").value = 0;
+        var options = {
+            onKeyPress: function (cep, e, field, options) {
+                //**masking
+                //var masks = ['(00)000-000-0000', '0000-000-0000'];
+                //var cepTemp = cep;
+                //console.log("CEP " + cep + ' ' + cep.length);
+                //console.log("CEPTEMP " + cepTemp + ' ' + cepTemp.length)
+                //var mask = (cepTemp.replace(/\D/g, '').length < 12) ? masks[1] : masks[0];
+                //console.log("CEP "+cep+' '+cep.length);
+                //console.log("CEPTEMP " + cepTemp + ' ' + cepTemp.length)
+                //console.log("\n");
+                //console.log(document.getElementById("network-provider").value);
+                //console.log("\n");
+                //$('.m-phone').mask(mask, options);
+                //**masking end
+                //var networks = @Model;
+                
+
+                //networks.forEach(function(number, index, array){
+                //    console.log("Element: " + number + ", Index: " + index + ", Array: " + array);
+                //});
+
+                var pglobe = [
+                    817,
+                    904,
+                    905,
+                    906,
+                    915,
+                    916,
+                    917,
+                    926,
+                    927,
+                    935,
+                    936,
+                    937,
+                    945,
+                    953,
+                    954,
+                    955,
+                    956,
+                    965,
+                    966,
+                    967,
+                    975,
+                    977,
+                    978,
+                    979,
+                    980,
+                    994,
+                    995,
+                    996,
+                    997
+                ];
+                var psmart = [
+                    813,
+                    907,
+                    908,
+                    909,
+                    910,
+                    911,
+                    912,
+                    913,
+                    914,
+                    918,
+                    919,
+                    920,
+                    921,
+                    928,
+                    929,
+                    930,
+                    938,
+                    939,
+                    940,
+                    946,
+                    947,
+                    948,
+                    949,
+                    950,
+                    951,
+                    961,
+                    963,
+                    968,
+                    969,
+                    970,
+                    981,
+                    989,
+                    992,
+                    998,
+                    999
+                ];
+
+                document.getElementById("network-provider").value = pglobe.includes(Number(cep.replace(/\D/g, '').slice(1, 4))) ? 1 : ( psmart.includes(Number(cep.replace(/\D/g, '').slice(1, 4))) ? 2 : 0 ) ;
+            }
+        };
+
+        $('.m-phone').mask('0000-000-0000', options);
+    });
+    function SetNetwork(network) {
+        return $('.network-provider').value(network)
+    }
+</script>

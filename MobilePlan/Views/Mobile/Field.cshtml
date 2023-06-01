@@ -1,0 +1,206 @@
+@model MobilePlan.Models.Contact
+@{
+    ViewBag.NetworkPrefixes = Model.NetworkPrefixList();
+}
+
+<script>
+    var prefixList = [];
+    var networkList = [];
+</script>
+
+@foreach (var net in ViewBag.NetworkPrefixes)
+{
+    <script>
+        prefixList.push("@net.Value");
+        networkList.push("@net.Text");
+    </script>
+}
+
+
+<script>
+    var availableTags = [];
+</script>
+
+@{
+    ViewBag.tagsList = new MobilePlan.Models.Contact().EmployeeList();
+}
+
+@foreach (var item in ViewBag.tagsList)
+{
+    <script>availableTags.push("@item.Text");</script>
+}
+
+<script>
+    $( function() {
+    
+        $( "#tags" ).autocomplete({
+            source: availableTags
+        });
+    })
+</script>
+
+
+
+
+<div class="col-md-12">
+    @if (ViewBag.Message != null)
+    {
+        <p class="alert alert-success">@ViewBag.Message</p>
+    }
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+</div>
+@*<div class="col-md-4">
+    @Html.LabelFor(model => model.EID)
+    @Html.DropDownListFor(model => model.EID, new MobilePlan.Models.Contact().EmployeeList(), "Select Employee", new { @class = "form-select form-select-sm" })
+    @Html.ValidationMessageFor(model => model.EID, "", new { @class = "text-danger" })
+</div>*@
+<div class="col-md-4">
+    @Html.LabelFor(model => model.MobileNo)
+    @Html.EditorFor(model => model.MobileNo, new { htmlAttributes = new { @class = "form-control form-control-sm m-phone" } })
+    @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+</div>
+<div class="col-md-4">
+    @Html.LabelFor(model => model.AccountName)
+    @Html.EditorFor(model => model.AccountName, new { htmlAttributes = new { @class = "form-control form-control-sm m-phone" } })
+    @Html.ValidationMessageFor(model => model.AccountName, "", new { @class = "text-danger" })
+</div>
+<div class="col-md-4">
+    @Html.LabelFor(model => model.AccountNo)
+    @Html.EditorFor(model => model.AccountNo, new { htmlAttributes = new { @class = "form-control form-control-sm m-phone" } })
+    @Html.ValidationMessageFor(model => model.AccountNo, "", new { @class = "text-danger" })
+</div>
+<div class="col-md-4">
+    @Html.LabelFor(model => model.NetworkTypeID)
+    @Html.DropDownListFor(model => model.NetworkTypeID, new MobilePlan.Models.NetworkType().ListNetwork(), new { @class = "form-select form-select-sm network-provider", id="network-provider" })
+    @Html.ValidationMessageFor(model => model.NetworkTypeID, "", new { @class = "text-danger" })
+</div>
+<div class="col-md-4">
+    @Html.LabelFor(model => model.BINCARD)
+    @Html.EditorFor(model => model.BINCARD, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+    @Html.ValidationMessageFor(model => model.BINCARD, "", new { @class = "text-danger" })
+</div>
+<div class="col-md-4">
+    @Html.LabelFor(model => model.Remarks)
+    @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+    @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+</div>
+<div class="col-md-4">
+    @Html.LabelFor(model => model.ContractStart)
+    @Html.EditorFor(model => model.ContractStart, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+    @Html.ValidationMessageFor(model => model.ContractStart, "", new { @class = "text-danger" })
+</div>
+<div class="col-md-4">
+    @Html.LabelFor(model => model.ContractEnd)
+    @Html.EditorFor(model => model.ContractEnd, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+    @Html.ValidationMessageFor(model => model.ContractEnd, "", new { @class = "text-danger" })
+</div>
+<div class="col-md-4">
+    @Html.LabelFor(model => model.Status)
+    @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+</div>
+<div class="col-md-4 ui-widget">
+    
+    
+    @foreach (var item in new MobilePlan.Models.Contact().EmployeeList())
+    {
+        @*<script>
+            availableTags.push("@item.Text");
+        </script>*@
+    }
+
+    @Html.LabelFor(model => model.EndUserName)
+    @Html.EditorFor(model => model.EndUserName, new { htmlAttributes = new { @class = "form-control form-control-sm ui-autocomplete-input", id = "tags", autocomplete = "off" } })
+    @Html.ValidationMessageFor(model => model.EndUserName, "", new { @class = "text-danger" })
+
+</div>
+<div class="col-md-4">
+    @Html.LabelFor(model => model.OverdueBalance)
+    @Html.EditorFor(model => model.OverdueBalance, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+    @Html.ValidationMessageFor(model => model.OverdueBalance, "", new { @class = "text-danger" })
+</div>
+<div class="col-md-4">
+    @Html.LabelFor(model => model.EarlyRenewal)
+    @Html.EditorFor(model => model.EarlyRenewal, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+    @Html.ValidationMessageFor(model => model.EarlyRenewal, "", new { @class = "text-danger" })
+</div>
+<div class="col-md-4">
+    @Html.LabelFor(model => model.ExistingPlan)
+    @Html.EditorFor(model => model.ExistingPlan, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+    @Html.ValidationMessageFor(model => model.ExistingPlan, "", new { @class = "text-danger" })
+</div>
+<div class="col-md-4">
+    @Html.LabelFor(model => model.Inclusion)
+    @Html.EditorFor(model => model.Inclusion, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+    @Html.ValidationMessageFor(model => model.Inclusion, "", new { @class = "text-danger" })
+</div>
+<div class="col-md-4">
+    @Html.LabelFor(model => model.HandsetModel)
+    @Html.EditorFor(model => model.HandsetModel, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+    @Html.ValidationMessageFor(model => model.HandsetModel, "", new { @class = "text-danger" })
+</div>
+<div class="col-md-4">
+    @Html.LabelFor(model => model.ExistingDuoNo)
+    @Html.EditorFor(model => model.ExistingDuoNo, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+    @Html.ValidationMessageFor(model => model.ExistingDuoNo, "", new { @class = "text-danger" })
+</div>
+<div class="col-md-4">
+    @Html.LabelFor(model => model.CreditLimit)
+    @Html.EditorFor(model => model.CreditLimit, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+    @Html.ValidationMessageFor(model => model.CreditLimit, "", new { @class = "text-danger" })
+</div>
+<div class="col-md-4">
+    @Html.LabelFor(model => model.SpendingLimit)
+    @Html.EditorFor(model => model.SpendingLimit, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+    @Html.ValidationMessageFor(model => model.SpendingLimit, "", new { @class = "text-danger" })
+</div>
+<div class="col-md-4">
+    @Html.LabelFor(model => model.BillingCycle)
+    @Html.EditorFor(model => model.BillingCycle, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+    @Html.ValidationMessageFor(model => model.BillingCycle, "", new { @class = "text-danger" })
+</div>
+
+<script>
+    @ViewBag.Execute
+
+</script>
+<style>
+    .ui-menu {
+        z-index:3000;
+    }
+</style>
+
+<script>
+    console.log('hey');
+    $(document).ready(function () {
+        document.getElementById("network-provider").value = 0;
+            var options = {
+                onKeyPress: function (cep, e, field, options) {
+                    console.log("input: " + cep);
+                    document.getElementById("network-provider").value = networkList.at(
+                        prefixList.indexOf(
+                            Number(
+                                cep.replace(/\D/g, '').slice(1, 4).toString()
+                            ).toString()
+                        )
+                    ) ? networkList.at(
+                        prefixList.indexOf(
+                            Number(
+                                cep.replace(/\D/g, '').slice(1, 4).toString()
+                            ).toString()
+                        )
+                    ) : -1;
+            }
+        };
+
+
+        $('.m-phone').mask('0000-000-0000', options);
+    });
+    function SetNetwork(network) {
+        return $('.network-provider').value(network)
+    }
+
+
+
+</script>

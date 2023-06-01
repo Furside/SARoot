@@ -1,0 +1,104 @@
+﻿@model CIS.Models.Contact
+@using PMSRedirect;
+@{
+    UserSessions user = new UserSessions();
+}
+
+<div class="modal-dialog" id="itemDetails">
+    <div class="modal-content">
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title">Profile</h6>
+                    </div>
+                    <div class="card-body">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="row mb-2 g-2">
+                                <div class="col-md-12">
+                                    <div class="form-label">Name</div>
+                                    @{ 
+                                        var holder = Model.Obj_EIDHolder;
+
+                                    }
+                                    <div class="row form-control" style="--bs-gutter-x: 0">@Model.Obj_EIDHolder.Info.Fullname </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Position</label>
+                                    <div class="row form-control" style="--bs-gutter-x: 0">@Model.Obj_EIDHolder.Info.position</div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Department</label>
+                                    <div class="row form-control" style="--bs-gutter-x: 0">@Model.Obj_EIDHolder.Info.department</div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    @Html.ActionLink("Back to List", "Index", "Home", "", new { @class = "btn btn-secondary" })
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h6 style="display:inline-block;">Contacts</h6>
+                            @*@Html.ActionLink("Create New", "Create", "", new { @class = "btn btn-primary text-white", style = "display:inline-block; float:right" })*@
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="data" class="table table-hover table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>@Html.DisplayNameFor(model => model.ID)</th>
+                                        <th>@Html.DisplayNameFor(model => model.NetworkNo)</th>
+                                        <th>Network Name</th>
+                                        <th>@Html.DisplayNameFor(model => model.EncBy)</th>
+                                        <th>@Html.DisplayNameFor(model => model.Remarks)</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (!Model.ID.Equals(null))
+                                    {
+                                        foreach (var item in Model.List(Model.EID == 0 ? user.User.ID.ToString() : Model.EID.ToString()))
+                                        {
+                                            <tr>
+                                                <td>@item.ID </td>
+                                                <td>@item.NetworkNo</td>
+                                                <td>@item.GetNetworkName(item.NetworkTypeID)</td>
+                                                <td>@item.GetEncoderFullName(item.EncBy) </td>
+                                                <td>@item.Remarks</td>
+                                                <td>
+                                                    <div class="text-center">
+                                                        <div class="btn-group">
+                                                            <a href="@Url.Action("Update", "Contact", new { id = item.ID })" class="btn btn-secondary btn-sm" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                            <a href="@Url.Action("DeleteView", "Contact", new { id = item.ID })" class="btn btn-secondary btn-sm" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+            $("#data").DataTable();
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
