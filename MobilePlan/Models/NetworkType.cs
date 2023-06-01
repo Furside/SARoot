@@ -95,13 +95,30 @@ namespace MobilePlan.Models
                     return 0;
                 }
             }
-            var ID = s.Insert("[tbl_NetworkType]", p =>
+            int ID = s.Insert("[tbl_NetworkType]", p =>
             {
-                p.Add("Network", obj.Network);
+                p.Add("Network", $"{obj.Network}");
                 p.Add("encBy", session.User.ID);
             });
             return ID;
         }
+
+        //public void Create(NetworkType obj, int objID)
+        //{
+        //    foreach (var item in List())
+        //    {
+        //        if (item.Network.ToLower().Trim() == obj.Network.ToLower().Trim())
+        //        {
+        //            return 0;
+        //        }
+        //    }
+        //    int ID = s.Insert("[tbl_NetworkType]", p =>
+        //    {
+        //        p.Add("Network", obj.Network);
+        //        p.Add("encBy", session.User.ID);
+        //    });
+        //}
+
 
         public void Update(NetworkType obj)
         {
