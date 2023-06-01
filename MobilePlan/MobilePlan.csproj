@@ -495,6 +495,7 @@
     <Content Include="dbMobilePlanDataSet.xss">
       <DependentUpon>dbMobilePlanDataSet.xsd</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\publish.pubxml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -848,6 +849,7 @@
     <Content Include="Views\NetworkType\Delete.cshtml" />
     <Content Include="Views\NetworkType\Detail.cshtml" />
     <Content Include="Views\NetworkType\ItemView.cshtml" />
+    <Content Include="Views\NetworkType\Report.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
