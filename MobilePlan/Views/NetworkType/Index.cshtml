@@ -30,14 +30,18 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>@Html.DisplayFor(modelItem => item.Network)</td>
-                            <td class="text-nowrap">
-                                <a href="#" class="text-dark" title="Edit/Modify" onclick="Actions('Edit', @item.ID)"><i class="fa fa-edit"></i></a> &nbsp;
-                                <a href="#" class="text-dark" title="Details" onclick="Actions('Detail', @item.ID)"><i class="fa fa-sticky-note "></i></a> &nbsp;
-                                <a href="#" class="text-dark" title="Delete" onclick="Actions('Delete', @item.ID)"><i class="fa fa-trash"></i></a> &nbsp;
-                            </td>
-                        </tr>
+                        if (item.ID != 0)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Network)</td>
+                                <td class="text-nowrap">
+                                    <a href="#" class="text-dark" title="Edit/Modify" onclick="Actions('Edit', @item.ID)"><i class="fa fa-edit"></i></a> &nbsp;
+                                    <a href="#" class="text-dark" title="Details" onclick="Actions('Detail', @item.ID)"><i class="fa fa-sticky-note "></i></a> &nbsp;
+                                    <a href="#" class="text-dark" title="Delete" onclick="Actions('Delete', @item.ID)"><i class="fa fa-trash"></i></a> &nbsp;
+                                </td>
+                            </tr>
+                        }
+
                     }
                 </tbody>
             </table>
@@ -64,8 +68,8 @@
                     <thead class="table-dark">
                         <tr>
                             @*<th>@Html.DisplayNameFor(model => model.Network)</th>*@
-                            <th>Account No</th>
                             <th>Account Name</th>
+                            <th>Account No</th>
                             <th>Mobile Number</th>
                             <th>End-User</th>
                             <th>Network</th>

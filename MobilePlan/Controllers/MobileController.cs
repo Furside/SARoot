@@ -38,7 +38,7 @@ namespace MobilePlan.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            return View(new Contact());
         }
 
         [HttpPost]
