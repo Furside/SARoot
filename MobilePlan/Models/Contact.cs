@@ -119,6 +119,7 @@ namespace MobilePlan.Models
 
         public string Employee { get; set; }
 
+        [Display(Name = "End-User")]
         public string EndUserName { get; set; }
 
         public string ModifiedByName { get; set; }

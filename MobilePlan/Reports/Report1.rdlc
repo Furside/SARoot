@@ -8,7 +8,7 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.86135cm</Width>
+                  <Width>2.86677cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -97,7 +97,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>1.86135cm</Size>
+                    <Size>2.76093cm</Size>
                     <CellContents>
                       <Textbox Name="Textbox174">
                         <CanGrow>true</CanGrow>
@@ -106,7 +106,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Network Type Name</Value>
+                                <Value>Network Provider</Value>
                                 <Style>
                                   <FontSize>7.5pt</FontSize>
                                 </Style>
@@ -167,7 +167,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>1.67888cm</Size>
+                            <Size>1.62596cm</Size>
                             <CellContents>
                               <Textbox Name="Textbox178">
                                 <CanGrow>true</CanGrow>
@@ -377,7 +377,7 @@
                                               <TablixMembers>
                                                 <TablixMember>
                                                   <TablixHeader>
-                                                    <Size>2.2567cm</Size>
+                                                    <Size>2.17733cm</Size>
                                                     <CellContents>
                                                       <Textbox Name="Textbox190">
                                                         <CanGrow>true</CanGrow>
@@ -447,7 +447,7 @@
                                                       <TablixMembers>
                                                         <TablixMember>
                                                           <TablixHeader>
-                                                            <Size>1.86135cm</Size>
+                                                            <Size>2.25823cm</Size>
                                                             <CellContents>
                                                               <Textbox Name="Textbox194">
                                                                 <CanGrow>true</CanGrow>
@@ -517,7 +517,7 @@
                                                               <TablixMembers>
                                                                 <TablixMember>
                                                                   <TablixHeader>
-                                                                    <Size>1.983cm</Size>
+                                                                    <Size>2.3005cm</Size>
                                                                     <CellContents>
                                                                       <Textbox Name="Textbox198">
                                                                         <CanGrow>true</CanGrow>
@@ -526,7 +526,7 @@
                                                                           <Paragraph>
                                                                             <TextRuns>
                                                                               <TextRun>
-                                                                                <Value>Existing Duo No</Value>
+                                                                                <Value>Existing Duo No.</Value>
                                                                                 <Style>
                                                                                   <FontSize>7.5pt</FontSize>
                                                                                 </Style>
@@ -663,7 +663,7 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>1.86135cm</Size>
+                    <Size>2.76093cm</Size>
                     <CellContents>
                       <Textbox Name="NetworkTypeName">
                         <CanGrow>true</CanGrow>
@@ -753,7 +753,7 @@
                             </SortExpression>
                           </SortExpressions>
                           <TablixHeader>
-                            <Size>1.67888cm</Size>
+                            <Size>1.62596cm</Size>
                             <CellContents>
                               <Textbox Name="AccountNo1">
                                 <CanGrow>true</CanGrow>
@@ -852,7 +852,7 @@
                                           <Paragraph>
                                             <TextRuns>
                                               <TextRun>
-                                                <Value>=Fields!ContractStart.Value</Value>
+                                                <Value>=Format(Fields!ContractStart.Value, "MM/dd/yyyy")</Value>
                                                 <Style>
                                                   <FontSize>7.5pt</FontSize>
                                                 </Style>
@@ -897,7 +897,7 @@
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>=Fields!ContractEnd.Value</Value>
+                                                    <Value>=Format(Fields!ContractEnd.Value, "MM/dd/yyyy")</Value>
                                                     <Style>
                                                       <FontSize>7.5pt</FontSize>
                                                     </Style>
@@ -1023,7 +1023,7 @@
                                                     </SortExpression>
                                                   </SortExpressions>
                                                   <TablixHeader>
-                                                    <Size>2.2567cm</Size>
+                                                    <Size>2.17733cm</Size>
                                                     <CellContents>
                                                       <Textbox Name="ExistingPlan">
                                                         <CanGrow>true</CanGrow>
@@ -1113,7 +1113,7 @@
                                                             </SortExpression>
                                                           </SortExpressions>
                                                           <TablixHeader>
-                                                            <Size>1.86135cm</Size>
+                                                            <Size>2.25823cm</Size>
                                                             <CellContents>
                                                               <Textbox Name="HandsetModel">
                                                                 <CanGrow>true</CanGrow>
@@ -1203,7 +1203,7 @@
                                                                     </SortExpression>
                                                                   </SortExpressions>
                                                                   <TablixHeader>
-                                                                    <Size>1.983cm</Size>
+                                                                    <Size>2.3005cm</Size>
                                                                     <CellContents>
                                                                       <Textbox Name="ExistingDuoNo">
                                                                         <CanGrow>true</CanGrow>
@@ -1375,7 +1375,7 @@
             </TablixRowHierarchy>
             <DataSetName>ds_Network</DataSetName>
             <Height>1.2cm</Height>
-            <Width>28.68678cm</Width>
+            <Width>31.17386cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1386,7 +1386,7 @@
         </ReportItems>
         <KeepTogether>true</KeepTogether>
         <Height>1.2cm</Height>
-        <Width>28.68678cm</Width>
+        <Width>31.17386cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1397,7 +1397,7 @@
     <Height>0.47244in</Height>
     <Style />
   </Body>
-  <Width>11.29401in</Width>
+  <Width>12.27317in</Width>
   <Page>
     <PageHeight>8.5in</PageHeight>
     <PageWidth>13in</PageWidth>
