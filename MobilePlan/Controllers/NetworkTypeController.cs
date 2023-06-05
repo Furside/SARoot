@@ -140,7 +140,7 @@ namespace MobilePlan.Controllers
             var file = rv.LocalReport.Render(Format == Format.PDF ? "pdf" : "EXCELOPENXML");
             
             Response.ContentType = Format == Format.PDF ? "application/pdf" : "application/vnd.ms-excel";
-            Response.AddHeader("content-disposition", Format == Format.PDF ? $"inline;filename=ITSD {DateTime.Now:yyyyMMddhhmmss}.pdf" : $"inline;filename=ITSD {DateTime.Now:yyyyMMddhhmmss}.xlsx");
+            Response.AddHeader("content-disposition", Format == Format.PDF ? $"inline;filename=MPReport {DateTime.Now:yyyyMMddhhmmss}.pdf" : $"inline;filename=ITSD {DateTime.Now:yyyyMMddhhmmss}.xlsx");
             Response.Buffer = true;
             Response.Clear();
             Response.BinaryWrite(file);

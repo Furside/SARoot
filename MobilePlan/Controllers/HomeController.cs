@@ -14,7 +14,12 @@ namespace MobilePlan.Controllers
         public string user { get; set; }
         public ActionResult Index()
         {
-            InitAdmin();
+            //debug
+            //InitAdmin();
+
+            //release
+            session = new UserSessions(@"SERVER=192.168.0.101\sqlexpress;DATABASE=DBPMS;USER=SA;PWD=1234");
+
             user = session.User.User;
             return RedirectToAction("Index", "Mobile");
         }
@@ -25,6 +30,13 @@ namespace MobilePlan.Controllers
             //session = new UserSessions(@"SERVER=122.54.131.132;DATABASE=DBPMS;USER=SA;PWD=1234");
             session = new UserSessions(@"SERVER=192.168.0.101\sqlexpress;DATABASE=DBPMS;USER=SA;PWD=1234");
             session.InitializeAdmin(125);
+        }
+
+        //release
+        public ActionResult Logout()
+        {
+            session.DestroySession();
+            return Redirect("/");
         }
 
         public ActionResult Redirect()

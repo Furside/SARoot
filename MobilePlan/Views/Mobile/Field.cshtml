@@ -8,12 +8,17 @@
     var networkList = [];
 </script>
 
-@foreach (var net in ViewBag.NetworkPrefixes)
-{
-    <script>
-        prefixList.push("@net.Value");
-        networkList.push("@net.Text");
-    </script>
+@{
+    foreach (var net in ViewBag.NetworkPrefixes)
+    {
+        //if(net.Value != 0)
+        {
+            <script>
+            prefixList.push("@net.Value");
+            networkList.push("@net.Text");
+            </script>
+        }
+    }
 }
 
 
@@ -72,7 +77,21 @@
 </div>
 <div class="col-md-4">
     @Html.LabelFor(model => model.NetworkTypeID)
-    @Html.DropDownListFor(model => model.NetworkTypeID, new MobilePlan.Models.NetworkType().ListNetwork(), new { @class = "form-select form-select-sm network-provider", id = "network-provider" })
+    @{
+        if ((ViewBag.Title == "Details") || (ViewBag.Title == "Delete"))
+        {
+            @Html.EditorFor(model => model.NetworkTypeName, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+        }
+        else
+        {
+            @Html.DropDownListFor(model => model.NetworkTypeID, new MobilePlan.Models.NetworkType().ListNetwork(), new { @class = "form-select form-select-sm network-provider", id = "network-provider" })
+            <script>
+                $(document).ready(function () {
+                    $('.network-provider').options[0].remove();
+                });
+            </script>
+        }
+    }
     @Html.ValidationMessageFor(model => model.NetworkTypeID, "", new { @class = "text-danger" })
 </div>
 <div class="col-md-4">
@@ -114,7 +133,7 @@
     @Html.ValidationMessageFor(model => model.EndUserName, "", new { @class = "text-danger" })
 
 </div>
-<div class="col-md-4">
+@*<div class="col-md-4">
     @Html.LabelFor(model => model.OverdueBalance)
     @Html.EditorFor(model => model.OverdueBalance, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
     @Html.ValidationMessageFor(model => model.OverdueBalance, "", new { @class = "text-danger" })
@@ -128,7 +147,7 @@
     @Html.LabelFor(model => model.ExistingPlan)
     @Html.EditorFor(model => model.ExistingPlan, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
     @Html.ValidationMessageFor(model => model.ExistingPlan, "", new { @class = "text-danger" })
-</div>
+</div>*@
 <div class="col-md-4">
     @Html.LabelFor(model => model.Inclusion)
     @Html.EditorFor(model => model.Inclusion, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
@@ -175,7 +194,7 @@
     $(document).ready(function () {
         @{
             ViewBag.DisableInput = "";
-            if (ViewBag.Title == "Delete")
+            if (ViewBag.Title == "Delete" || ViewBag.Title == "Details")
             {
                 ViewBag.DisableInput = "DisableInput();"; 
             }
@@ -185,27 +204,27 @@
             }
         }
         @ViewBag.DisableInput
-                    document.getElementById("network-provider").value = 0;
-                var options = {
-                onKeyPress: function (cep, e, field, options) {
-                    console.log("input: " + cep);
-                    document.getElementById("network-provider").value = networkList.at(
-                        prefixList.indexOf(
-                            Number(
-                                cep.replace(/\D/g, '').slice(1, 4).toString()
-                            ).toString()
-                        )
-                    ) ? networkList.at(
-                        prefixList.indexOf(
-                            Number(
-                                cep.replace(/\D/g, '').slice(1, 4).toString()
-                            ).toString()
-                        )
-                    ) : -1;
-                }
-            };
+        document.getElementById("network-provider").value = 0;
+        var options = {
+            onKeyPress: function (cep, e, field, options) {
+                console.log("input: " + cep);
+                document.getElementById("network-provider").value = networkList.at(
+                    prefixList.indexOf(
+                        Number(
+                            cep.replace(/\D/g, '').slice(1, 4).toString()
+                        ).toString()
+                    )
+                ) ? networkList.at(
+                    prefixList.indexOf(
+                        Number(
+                            cep.replace(/\D/g, '').slice(1, 4).toString()
+                        ).toString()
+                    )
+                ) : -1;
+            }
+        };
 
-            $('.m-phone').mask('0000-000-0000', options);
+    $('.m-phone').mask('0000-000-0000', options);
 
             
     });
@@ -215,10 +234,12 @@
 
     function DisableInput() {
         $('.form-control').prop('readonly', true);
+        $('.form-select').prop('disable', true);
     }
 
     function EnableInput() {
         $('.form-control').prop('readonly', false);
+        $('.form-select').prop('disable', false);
     }
 
     @{

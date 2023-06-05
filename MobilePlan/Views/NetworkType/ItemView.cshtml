@@ -26,20 +26,21 @@
                             @*<th>@Html.DisplayNameFor(model => model.Network)</th>*@
                             <th>End-User</th>
                             <th>Phone Number</th>
+                            <th>Network Provider</th>
                             <th>BINCARD</th>
-                            <th>Remarks</th>
+                            <th>Status</th>
+                            <th>Exisitng Plan</th>
+                            @*<th>Remarks</th>
                             <th>Contract Start Date</th>
                             <th>Contract End</th>
-                            <th>Status</th>
                             <th>Overdue Balance</th>
                             <th>Early Renewal Fee</th>
-                            <th>Exisitng Plan</th>
                             <th>Inclusion</th>
                             <th>Handset Model</th>
                             <th>Existing Duo No.</th>
                             <th>Credit Limit</th>
                             <th>Spending Limit</th>
-                            <th>Billing Cycle</th>
+                            <th>Billing Cycle</th>*@
                         </tr>
                     </thead>
                     <tbody>
@@ -49,20 +50,21 @@
                                 @*<td>@Html.DisplayFor(modelItem => item.Network )</td>*@
                                 <td>@inneritem.EndUserName </td>
                                 <td>@inneritem.MobileNo</td>
+                                <td>@inneritem.NetworkTypeName</td>
                                 <td>@inneritem.BINCARD</td>
-                                <td>@inneritem.Remarks</td>
+                                <td>@inneritem.Status</td>
+                                <td>@inneritem.ExistingPlan</td>
+                                @*<td>@inneritem.Remarks</td>
                                 <td>@inneritem.ContractStart</td>
                                 <td>@inneritem.ContractEnd</td>
-                                <td>@inneritem.Status</td>
                                 <td>@inneritem.OverdueBalance</td>
                                 <td>@inneritem.EarlyRenewal</td>
-                                <td>@inneritem.ExistingPlan</td>
                                 <td>@inneritem.Inclusion</td>
                                 <td>@inneritem.HandsetModel</td>
                                 <td>@inneritem.ExistingDuoNo</td>
                                 <td>@inneritem.CreditLimit</td>
                                 <td>@inneritem.SpendingLimit</td>
-                                <td>@inneritem.BillingCycle</td>
+                                <td>@inneritem.BillingCycle</td>*@
                                     @*<a href="#" class="text-dark" title="Edit/Modify" onclick="Actions('Edit', @item.ID)"><i class="fa fa-edit"></i></a> &nbsp;
                                         <a href="#" class="text-dark" title="Details" onclick="Actions('Detail', @item.ID)"><i class="fa fa-sticky-note "></i></a> &nbsp;
                                         <a href="#" class="text-dark" title="Delete" onclick="Actions('Delete', @item.ID)"><i class="fa fa-trash"></i></a> &nbsp;*@

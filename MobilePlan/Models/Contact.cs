@@ -33,7 +33,7 @@ namespace MobilePlan.Models
         public string AccountName { get; set; }
 
         //[RegularExpression(@"^(0|([0-9]{1,3}))([0-9]){10}",
-        [RegularExpression(@"(((\+?[1-9]{2,3})|(0))?([1-9]{3})(\-)?([0-9]{3})(\-)?([0-9]{4})(\-)?)", ErrorMessage = "Please enter a valid phone number \nEx: 09123456789 or 09123456789 ")]
+        [RegularExpression(@"(((\+?[0-9]{2,3})|(0))?([0-9]{3})(\-)?([0-9]{3})(\-)?([0-9]{4})(\-)?)", ErrorMessage = "Please enter a valid phone number \nEx: 09123456789")]
         [Display(Name = "Mobile No")]
         [Required]
         //[MaxLength(13)]
@@ -142,20 +142,6 @@ namespace MobilePlan.Models
 
         public List<Contact> List(int ID = 0)
         {
-            //string Search = "";
-            //return s.Query<Contact>($"SELECT * FROM Contact WHERE (ContractEnd BETWEEN @Start AND @End) AND (ID = @ID)", p =>
-            //{
-            //    p.Add("@Start", StartDate);
-            //    p.Add("@End", EndDate);
-            //    p.Add("@ID", ID);
-            //});
-
-            //return s.Query<Contact>("tbl_Contact_Proc", p => { p.Add("@Type", "FindNetwork"); p.Add("@ID", $"{ID}"); }, CommandType.StoredProcedure)
-            //.Select(r =>
-            //{
-            //    return r;
-            //}).ToList();
-
             return s.Query<Contact>("tbl_Contact_Proc", p => { p.Add("@Type", "FindNetwork"); p.Add("@ID", $"{ID}"); }, CommandType.StoredProcedure)
             .Select(r =>
             {
@@ -165,20 +151,6 @@ namespace MobilePlan.Models
 
         public List<Contact> List(DateTime? StartDate, DateTime? EndDate, int NetworkID = 0, string Status = "All")
         {
-            //string Search = "";
-            //return s.Query<Contact>($"SELECT * FROM Contact WHERE (ContractEnd BETWEEN @Start AND @End) AND (ID = @ID)", p =>
-            //{
-            //    p.Add("@Start", StartDate);
-            //    p.Add("@End", EndDate);
-            //    p.Add("@ID", ID);
-            //});
-
-            //return s.Query<Contact>("tbl_Contact_Proc", p => { p.Add("@Type", "FindNetwork"); p.Add("@ID", $"{ID}"); }, CommandType.StoredProcedure)
-            //.Select(r =>
-            //{
-            //    return r;
-            //}).ToList();
-
             DatePrinted = DateTime.Now;
             user = session.User.User;
 
@@ -291,8 +263,39 @@ namespace MobilePlan.Models
                     emps.Add(emp);
                 }
             });
-            var list = new SelectList(emps.OrderBy(emp => emp.GetType().GetProperty("Fullname")?.GetValue(emp) ), "ID", "Fullname") ;
-            return list;
+
+            return new SelectList(emps.OrderBy(emp => emp.GetType().GetProperty("Fullname")?.GetValue(emp)), "ID", "Fullname");
+        }
+
+
+
+        public SelectList StatusSelectList()
+        {
+            var emps = new List<object>();
+            //var emps = new List<KeyValuePair<int, string>>();
+            var users = new UserSessions().User.List();
+
+            var statusList = s.Query<Contact>("tbl_Contact_Proc", p => { p.Add("@Type", "SelectAllStatus"); }, CommandType.StoredProcedure)
+            .Select(r =>
+            {
+                return r;
+            }).ToList();
+
+            users.ForEach(r =>
+            {
+                if (!string.IsNullOrEmpty(r.Info?.Fullnamev2))
+                {
+                    var emp = new
+                    {
+                        ID = r.ID,
+                        Fullname = r.Info?.Fullnamev2.Trim()
+                    };
+                    //var emp = new KeyValuePair<int, string>(r.ID, r.Info?.Fullnamev2);
+                    emps.Add(emp);
+                }
+            });
+
+            return new SelectList(emps.OrderBy(emp => emp.GetType().GetProperty("Fullname")?.GetValue(emp)), "ID", "Fullname");
         }
 
         public static SelectList NetworkListItems { get; set; }
