@@ -15,10 +15,10 @@ namespace MobilePlan.Controllers
         public ActionResult Index()
         {
             //debug
-            InitAdmin();
+            //InitAdmin();
 
             //release
-            //session = new UserSessions(@"SERVER=192.168.0.101\sqlexpress;DATABASE=DBPMS;USER=SA;PWD=1234");
+            session = new UserSessions(@"SERVER=192.168.0.101\sqlexpress;DATABASE=DBPMS;USER=SA;PWD=1234");
 
             user = session.User.User;
             return RedirectToAction("Index", "Mobile");
