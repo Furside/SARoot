@@ -14,8 +14,14 @@
         //if(net.Value != 0)
         {
             <script>
-            prefixList.push("@net.Value");
-            networkList.push("@net.Text");
+                prefixList.push("@net.Value");
+                if(@net.Value == 0){
+                    networkList.push("Please Select Network");
+                }
+                else{
+                    networkList.push("@net.Text");
+                }
+
             </script>
         }
     }
@@ -214,13 +220,12 @@
                             cep.replace(/\D/g, '').slice(1, 4).toString()
                         ).toString()
                     )
-                ) ? networkList.at(
-                    prefixList.indexOf(
-                        Number(
-                            cep.replace(/\D/g, '').slice(1, 4).toString()
-                        ).toString()
-                    )
-                ) : -1;
+                );
+                if (prefixList.indexOf(Number(cep.replace(/\D/g, '').slice(1, 4).toString()).toString()) == -1)
+                {
+                    document.getElementById("network-provider").value = 0;
+                }
+                console.log(document.getElementById("network-provider").value);
             }
         };
 

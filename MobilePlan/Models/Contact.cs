@@ -250,6 +250,7 @@ namespace MobilePlan.Models
             var emps = new List<object>();
             //var emps = new List<KeyValuePair<int, string>>();
             var users = new UserSessions().User.List();
+            
             users.ForEach(r =>
             {
                 if (!string.IsNullOrEmpty(r.Info?.Fullnamev2))
