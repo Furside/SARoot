@@ -44,20 +44,20 @@ namespace MobilePlan.Models
         public Int32 NetworkTypeID { get; set; }
 
         [Display(Name = "BINCARD")]
-        [Required]
+        //[Required]
         public String BINCARD { get; set; }
 
         [Display(Name = "Remarks")]
         public String Remarks { get; set; }
 
         [Display(Name = "ContractStart")]
-        [DateLimit("ContractEnd", false)]
+        //[DateLimit("ContractEnd", false)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [DataType(DataType.Date)]
         public DateTime? ContractStart { get; set; }
 
         [Display(Name = "ContractEnd")]
-        [DateLimit("ContractStart", true)]
+        //[DateLimit("ContractStart", true)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [DataType(DataType.Date)]
         public DateTime? ContractEnd { get; set; }

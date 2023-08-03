@@ -28,8 +28,10 @@ namespace MobilePlan.Controllers
         {
             //session = new UserSessions(@"SERVER=WIN-IIS\SQLEXPRESS;DATABASE=DBPMS;USER=SA;PWD=1234");
             //session = new UserSessions(@"SERVER=122.54.131.132;DATABASE=DBPMS;USER=SA;PWD=1234");
-            session = new UserSessions(@"SERVER=192.168.0.101\sqlexpress;DATABASE=DBPMS;USER=SA;PWD=1234");
-            session.InitializeAdmin(125);
+            //session = new UserSessions(@"SERVER=192.168.0.101\sqlexpress;DATABASE=DBPMS;USER=SA;PWD=1234");
+            session = new UserSessions(@"SERVER=JOSEITSD\sqlexpress;DATABASE=DBPMS;USER=SA;PWD=1234");
+            session.InitializeAdmin(576);
+            //session.InitializeAdmin(125);
         }
 
         //release
